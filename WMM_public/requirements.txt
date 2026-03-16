@@ -1,0 +1,15 @@
+pandas
+numpy
+boto3
+streamlit
+streamlit_player
+streamlit_autorefresh
+pyvis
+networkx
+fsspec
+s3fs
+scipy
+plotly
+google-auth
+google-auth-httplib2
+google-api-python-client
