@@ -24,7 +24,7 @@ def contact_network():
             else:
                 G.add_node(row.Actor, infected=0)
 
-        if row.Audience not in G.nodes or row.infection_intervention:
+        if row.Audience not in G.nodes :
             if row.success:
                 G.add_node(row.Audience, infected=1)
             #elif row.infection_intervention and not row.success:
