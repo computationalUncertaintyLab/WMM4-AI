@@ -5,6 +5,7 @@ import streamlit as st
 import pandas as pd
 import random
 from datetime import datetime, timedelta
+import numpy as np 
 
 def contact_network():
     from pyvis.network import Network
@@ -15,22 +16,28 @@ def contact_network():
 
     # Create a directed graph from the dataset
     G = nx.DiGraph()
-    for _, row in interactions.iterrows():
-        if row.Actor not in G.nodes:
-            if row.success:
-                G.add_node(row.Actor, infected=1)
-            #elif row.infection_intervention and not row.success:
-            #    G.add_node(row.Actor, infected=2)
-            else:
-                G.add_node(row.Actor, infected=0)
 
-        if row.Audience not in G.nodes :
-            if row.success:
-                G.add_node(row.Audience, infected=1)
-            #elif row.infection_intervention and not row.success:
-            #    G.add_node(row.Audience, infected=2)
-            else:
-                G.add_node(row.Audience, infected=0)
+    for user in set(interactions["Actor"].unique()) | set(interactions["Audience"].unique())  :
+        subset = interactions.loc[ (interactions.Audience == user) ]
+        any_success = np.max(subset["success"])
+
+        if any_success:
+            G.add_node(user, infected=1)
+        else:
+            G.add_node(user, infected=0)
+
+    for _, row in interactions.iterrows():
+        # if row.Actor not in G.nodes:
+        #     if row.success:
+        #         G.add_node(row.Actor, infected=1)
+        #     else:
+        #         G.add_node(row.Actor, infected=0)
+                
+        # if row.Audience not in G.nodes :
+        #     if row.success:
+        #         G.add_node(row.Audience, infected=1)
+        #     else:
+        #         G.add_node(row.Audience, infected=0)
         G.add_edge(row['Actor'], row['Audience'])
 
         # Set background to white and default node color to black
