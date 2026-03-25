@@ -92,7 +92,7 @@ def search_user(search_username=None, G=None):
     infected_count = len(primary_contacts)
     infection_data = interactions[
         (interactions['Actor'] == search_username) & 
-        (interactions['infection_intervention'] == 1) & 
+        #(interactions['infection_intervention'] == 1) & 
         (interactions['success'] == 1)
     ]
     first_infection = infection_data['timestamp'].min() if not infection_data.empty else "No infections"
