@@ -204,7 +204,7 @@ def add_user_data_to_database( actor, audience , infection_or_intervention = Non
 
                     #--Attmept an infection event
                     INFECTION_BASELINE = 0.75 #<--this is the baseline probability of infection
-                    INFECTION_BASELINE = 2
+                    #INFECTION_BASELINE = 2
                     
                     if np.random.random() < INFECTION_BASELINE:
                         #--Add new INFECTION record
