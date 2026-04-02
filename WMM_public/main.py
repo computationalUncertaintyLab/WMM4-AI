@@ -2,12 +2,10 @@
 
 import streamlit as st
 
-from pages import user_input, login, report_upload
+from pages import user_input, login, public_health_communication
 
 import boto3
 import pandas as pd
-
-from pages import login
 
 def attach_WMM_data():
     AWS_S3_BUCKET     = "wmm-2026"
@@ -32,8 +30,7 @@ if __name__ == "__main__":
     # Build navigation options based on user group
     nav_options = ["🏠 Home", "👤 User Input", "🔗 Contact Network Infections", "📈 Cases Over Time"]
     
-    # Add report upload option for intervention group users
-    nav_options.append("📄 Report Upload")
+    nav_options.append("📢 Public health communication")
     
     page = st.sidebar.radio("Go to", nav_options)
 
@@ -44,8 +41,8 @@ if __name__ == "__main__":
     # Page routing
     elif page == "👤 User Input":
         user_input.show()
-    elif page == "📄 Report Upload":
-        report_upload.show()
+    elif page == "📢 Public health communication":
+        public_health_communication.show()
     # elif page == "🔗 Contact Network Infections":
     #     contactnetwork.show_contact_network()  # Call the function from contactnetwork.py
     # elif page == "📈 Cases Over Time":
