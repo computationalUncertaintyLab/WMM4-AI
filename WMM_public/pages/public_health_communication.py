@@ -1,5 +1,6 @@
 """
 Weekly public health communications: one folder per release (comm1, comm2, …).
+Posts are listed with the highest-numbered folder first (e.g. comm2 above comm1).
 
 Each folder may use either:
   - public_health_communication.md with ## Social media, ## Brief communication, ## Detailed communication
@@ -22,9 +23,10 @@ COMM_ROOT = Path(__file__).resolve().parent / "communications"
 
 
 def _comm_sort_key(name: str) -> tuple:
+    """Larger comm numbers first; non-standard folder names last."""
     m = re.fullmatch(r"comm(\d+)", name, re.IGNORECASE)
     if m:
-        return (0, int(m.group(1)))
+        return (0, -int(m.group(1)))
     return (1, name.lower())
 
 
